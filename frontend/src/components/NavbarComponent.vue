@@ -66,7 +66,7 @@ export default {
         }
       } catch (error) {
         if (error && error.response) {
-          //
+          // console.log(error.response)
         }
       }
     },

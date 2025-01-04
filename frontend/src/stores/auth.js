@@ -16,7 +16,7 @@ const useAuthStore = defineStore('auth', ({
   actions: {
     async fetchUser() {
       try {
-        const response = await apiClient.get('/user');
+        const response = await apiClient.get('user');
         if (response && response.data) {
           this.loggedIn = true;
           this.user = response.data;
@@ -31,7 +31,7 @@ const useAuthStore = defineStore('auth', ({
         }
       }
     },
-    async fetchTodos(url = "/todo") {
+    async fetchTodos(url = "todo") {
       try {
         const response = await apiClient.get(url)
         if (response && response.data) {
@@ -54,7 +54,7 @@ const useAuthStore = defineStore('auth', ({
       this.loggedIn= false,
       this.sessionExpired = false;
     },
-    async fetchDeletedTodos(url = '/deletedtodos') {
+    async fetchDeletedTodos(url = 'deletedtodos') {
       try {
         const response = await apiClient.get(url);
         if (response && response.data) {

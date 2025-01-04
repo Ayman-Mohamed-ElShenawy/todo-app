@@ -83,14 +83,16 @@ export default {
    this.fetchDeletedTodos();
   },
   methods: {
-    async fetchDeletedTodos(url='/deletedtodos') {
+    async fetchDeletedTodos(url='deletedtodos') {
       this.fetchDeleted = true
       try {
        const res= await this.auth.fetchDeletedTodos(url)
         if (res && res.data) {
+          // console.log(res.data)
           this.fetchDeleted = false
         }
       } catch (error) {
+        // console.log(error.response);
         this.fetchDeleted = false
       } finally {
         this.fetchDeleted = false
@@ -103,11 +105,11 @@ export default {
           this.auth.deletedTodos = this.auth.deletedTodos.filter(todo=>todo.id !== id);
           this.fetchDeletedTodos()
           alert(res.data.message)
-          //   console.log(res.data.message)
+            // console.log(res.data)
         }
       } catch (error) {
         if (error && error.response) {
-          //   console.log(error.response.data.message)
+            // console.log(error.response)
         }
       }
     },

@@ -67,12 +67,12 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await apiClient.post('/login', {
+        const response = await apiClient.post('login', {
           email: this.form.email,
           password: this.form.password,
         })
         if (response && response.data.token) {
-          // console.log(response.data.token,response.data.message);
+          // console.log(response.data);
           localStorage.setItem('token', response.data.token)
           this.errors = []
           this.auth.fetchUser()
@@ -80,6 +80,7 @@ export default {
         }
       } catch (error) {
         if (error && error.response) {
+          // console.log(error.response);
           this.errors = Object.values(error.response.data.errors).flat();
         
         }

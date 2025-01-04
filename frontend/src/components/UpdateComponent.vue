@@ -98,7 +98,7 @@ export default {
         }
       } catch (error) {
         if (error && error.response) {
-        //
+        // console.log(error.response);
         }
       }
     },
@@ -121,6 +121,7 @@ export default {
             
         } catch (error) {
             if(error && error.response){
+              // console.log(error.response);
                 this.updating = false;
                 this.errors = error.response.data.message;
             }

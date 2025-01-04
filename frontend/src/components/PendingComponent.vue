@@ -53,7 +53,7 @@
 </template>
 
 <script>
-//  import { onMounted, ref, watch } from 'vue'
+
 import useAuthStore from '../../src/stores/auth.js'
 import apiClient from '../api_client/client.js'
 import Loader from './Loader.vue'
@@ -78,13 +78,13 @@ export default {
       try {
         const response = await apiClient.put(`todo/${id}`)
         if (response && response.data) {
-          // console.log(response.data.message)
+          // console.log(response.data);
           alert(response.data.message)
-          await auth.fetchTodos()
+          await this.auth.fetchTodos()
         }
       } catch (error) {
         if (error && error.response) {
-          // console.log(error.response.data.message)
+          // console.log(error.response);
         }
       }
     },
@@ -92,23 +92,23 @@ export default {
       try {
         const response = await apiClient.delete(`todo/${id}`)
         if (response && response.data.message) {
+          // console.log(response.data);
           this.auth.todos = this.auth.todos.filter(todo=>todo.id !==id);
           await this.auth.fetchTodos()
-          // console.log(response.data.message);
           alert(response.data.message)
         }
       } catch (error) {
         if (error && error.response) {
-          // console.log(error.reponse.data.message);
+          // console.log(error.response);
         }
       }
     },
-    async fetchTodos(url="/todo") {
+    async fetchTodos(url="todo") {
       this.fetchingTodos = true
       try {
         await this.auth.fetchTodos(url)
       } catch (error) {
-        
+        // console.log(error.response);
       }
       finally{
 
@@ -125,11 +125,11 @@ export default {
         const response = await apiClient.put(`todostatus/${id}`)
         if (response && response.data) {
           await this.auth.fetchTodos();
-          //
+          // console.log(response.data)
         }
       } catch (error) {
         if (error && error.response) {
-          //
+          // console.log(error.response)
         }
       }
     },

@@ -146,12 +146,13 @@ export default {
     async newTodo() {
       try {
         this.creating = true
-        const response = await apiClient.post('/todo', {
+        const response = await apiClient.post('todo', {
           name: this.form.name,
           title: this.form.title,
           description: this.form.description,
         })
         if (response && response.data) {
+          // console.log(response.data);
           this.creating = false
           alert(response.data.message);
           await this.auth.fetchTodos(); // Refresh the todos
@@ -162,7 +163,7 @@ export default {
         }
       } catch (error) {
         if (error && error.response) {
-          // console.log(error);
+          // console.log(error.response);
           this.errors = error.response.data.message
           this.creating = false
         } else {

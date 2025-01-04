@@ -58,6 +58,7 @@ router.beforeEach(async (to, from, next) => {
         await apiClient.get('/user'); // Validate token with API
         next(); // Proceed to the route
       } catch (error) {
+        console.error('Token validation failed:', error);
         localStorage.removeItem('token'); // Clear invalid token
         next('/login'); // Redirect to login
       }
@@ -78,6 +79,7 @@ router.beforeEach(async (to, from, next) => {
     next(); // Proceed to the route
   }
 });
+
 
 export default router;
 

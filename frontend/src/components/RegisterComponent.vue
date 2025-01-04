@@ -91,11 +91,13 @@ export default {
           password_confirmation: this.form.password_confirmation,
         })
         if (response && response.data) {
+          // console.log(response.data);
           this.errors = []
           this.$router.push('/login')
         }
       } catch (error) {
         if (error && error.response) {
+          // console.log(error.response);
           this.errors = Object.values(error.response.data.errors||{}).flat()
         } else {
           this.errors = []
