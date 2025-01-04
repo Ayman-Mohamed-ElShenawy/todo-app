@@ -137,14 +137,9 @@ class TodoController extends Controller
                 'message' => $validator->messages(),
             ], 422);
         }
-
-        // Update or create category
         $category = Category::firstOrCreate(
             ['user_id' => Auth::id(), 'name' => $request->input('name')]
         );
-
-
-        // Create the todo item
         $todo = $todo->update([
             'category_id' => $category->id,
             'title' => $request->input('title'),
@@ -152,11 +147,7 @@ class TodoController extends Controller
             'status' => 'Pending',
         ]);
 
-        // Check if the todo was created successfully
         if ($todo) {
-            // Attach the todo to the authenticated user
-            // $todo->users()->attach(Auth::id());    
-
             return response()->json([
                 'status' => 200,
                 'message' => 'Todo Updated Successfully',
@@ -175,12 +166,12 @@ class TodoController extends Controller
     public function destroy(Todo $todo): JsonResponse
     {
         // Check if the authenticated user is the owner of the Todo
-        if (Auth::id() !== $todo->user_id) {
-            return response()->json([
-                'status' => 403, // Forbidden, as the user is not authorized to delete this todo
-                'message' => 'You are not authorized to delete this todo.',
-            ], 403);
-        }
+        // if (Auth::id() !== $todo->user_id) {
+        //     return response()->json([
+        //         'status' => 403, // Forbidden, as the user is not authorized to delete this todo
+        //         'message' => 'You are not authorized to delete this todo.',
+        //     ], 403);
+        // }
 
         // Proceed to delete the todo
         if ($todo) {
@@ -188,6 +179,7 @@ class TodoController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' => 'Todo Deleted Successfully',
+                'todo'=>$todo,
             ], 200);
         }
 

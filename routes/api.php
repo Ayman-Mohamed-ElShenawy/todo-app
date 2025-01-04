@@ -26,10 +26,15 @@ route::middleware('auth:sanctum')->group(function () {
     });
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
-        Route::resource('todo',TodoController::class);
-       Route::put('todostatus/{todo}',[TodoController::class,'todoStatus']);
+
+        Route::resource('todo',TodoController::class)->except(['update','destroy']);
+        Route::post('updateTodo/{todo}',[TodoController::class,'update']);
+        Route::post('deletetodo/{todo}',[TodoController::class,'destroy']);
+
+
+       Route::post('todostatus/{todo}',[TodoController::class,'todoStatus']);
        Route::get('deletedtodos',[TodoController::class,'deletedTodos']);
-       Route::delete('deleteforever/{id}',[TodoController::class,'deleteForever']);
+       Route::post('deleteforever/{id}',[TodoController::class,'deleteForever']);
        Route::post('restoretodos/{id}',[TodoController::class,'restoreTodos']);
 });
 

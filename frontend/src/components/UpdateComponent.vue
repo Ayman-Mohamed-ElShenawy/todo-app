@@ -106,7 +106,7 @@ export default {
         try {
             this.updating = true;
             const id = this.$route.params.id;
-            const response = await apiClient.put(`todo/${id}`,{
+            const response = await apiClient.post(`updateTodo/${id}`,{
                 name:this.form.name,
                 title:this.form.title,
                 description:this.form.description

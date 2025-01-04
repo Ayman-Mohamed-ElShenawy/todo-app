@@ -76,10 +76,10 @@ export default {
   methods: {
     async updateTodos(id) {
       try {
-        const response = await apiClient.put(`todo/${id}`)
+        const response = await apiClient.get(`todo/${id}/edit`)
         if (response && response.data) {
           // console.log(response.data);
-          alert(response.data.message)
+          // alert(response.data.message)
           await this.auth.fetchTodos()
         }
       } catch (error) {
@@ -90,7 +90,7 @@ export default {
     },
     async deleteTodos(id) {
       try {
-        const response = await apiClient.delete(`todo/${id}`)
+        const response = await apiClient.post(`deletetodo/${id}`)
         if (response && response.data.message) {
           // console.log(response.data);
           this.auth.todos = this.auth.todos.filter(todo=>todo.id !==id);
@@ -122,7 +122,7 @@ export default {
   },
     async updateTodoStatus(id) {
       try {
-        const response = await apiClient.put(`todostatus/${id}`)
+        const response = await apiClient.post(`todostatus/${id}`)
         if (response && response.data) {
           await this.auth.fetchTodos();
           // console.log(response.data)

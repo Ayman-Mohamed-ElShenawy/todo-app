@@ -100,7 +100,7 @@ export default {
     },
     async PermenantlyDelete(id) {
       try {
-        const res = await apiClient.delete(`deleteforever/${id}`)
+        const res = await apiClient.post(`deleteforever/${id}`)
         if (res && res.data) {
           this.auth.deletedTodos = this.auth.deletedTodos.filter(todo=>todo.id !== id);
           this.fetchDeletedTodos()
